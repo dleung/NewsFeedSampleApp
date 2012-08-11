@@ -1,0 +1,11 @@
+puts "Seeding USERS"
+USER_1 = User.create!(first_name: 'Noreen', last_name: 'Mancha')
+USER_2 = User.create!(first_name: 'Ted', last_name: 'Kicklighter')
+USER_3 = User.create!(first_name: 'Tyrone', last_name: 'Malo')
+USER_4 = User.create!(first_name: 'Jamie', last_name: 'Freudenburg')
+USER_5 = User.create!(first_name: 'Guy', last_name: 'Wallick')
+USER_6 = User.create!(first_name: 'Margery', last_name: 'Kogan')
+USER_7 = User.create!(first_name: 'Guy', last_name: 'Marron')
+USER_8 = User.create!(first_name: 'Allan', last_name: 'Snavely')
+USER_9 = User.create!(first_name: 'Sofia', last_name: 'Blackerby')
+USER_0 = User.create!(first_name: 'Guy', last_name: 'Holsey')

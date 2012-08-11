@@ -1,0 +1,7 @@
+en:
+  news_feeds: 
+    create_object: "%{actor} created a %{object_class}: %{object_name}"
+    update_object: "%{actor} updated a %{object_class}: %{object_name}" 
+    delete_object: "%{actor} deleted a %{object_class}: %{object_name}" 
+    send_object: "%{actor} sent %{recipient_name} a %{object_class}: %{object_name}"  
+      

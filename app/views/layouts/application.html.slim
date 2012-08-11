@@ -1,0 +1,18 @@
+doctype html
+= conditional_html do
+  head
+    title News Feed Sample Application
+    = stylesheet_link_tag params[:controller]
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag params[:controller]
+    = favicon_link_tag
+    = csrf_meta_tags
+    = render 'layouts/font'
+  body
+    #wrapper{class=controller_name}
+      = render 'layouts/header'
+      #main
+        section
+          = yield
+    .push
+    #footer= render 'layouts/footer'
