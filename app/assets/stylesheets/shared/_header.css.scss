@@ -1,0 +1,27 @@
+#banner {
+  height: 90px;
+  width: 100%;
+  border-bottom: 2px solid #bfbfbf;
+  background: image-url("banner_bk.jpg") repeat-y #ced6ff;
+  #banner_image {
+    float: left;
+    width: 247px;
+    height: 90px;
+  }
+  
+  h1 {
+    float: left;
+    position: relative;
+    top: 12px;
+    left: -80px;
+    font-size: 32px;
+  }
+  
+  #flying_paper_image {
+    float: right;
+    margin-right: 30px;
+    width: 342px;
+    height: 77px;
+    
+  }
+}
