@@ -4,16 +4,16 @@
   border-bottom: 2px solid #bfbfbf;
   background: image-url("banner_bk.jpg") repeat-y #ced6ff;
   #banner_image {
-    float: left;
+    position: absolute;
     width: 247px;
     height: 90px;
   }
   
   h1 {
+    left: 180px;
     float: left;
-    position: relative;
+    position: absolute;
     top: 12px;
-    left: -80px;
     font-size: 32px;
   }
   

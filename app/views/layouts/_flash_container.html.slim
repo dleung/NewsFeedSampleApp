@@ -1,0 +1,4 @@
+= js extend_gritter :position => :top_middle    
+- flash.each do |type, content|
+  - title = type == :error ? t('gritter.error') : t('gritter.notification')
+  = js add_gritter(content, :sticky => (type == :error), :title => title)

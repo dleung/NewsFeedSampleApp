@@ -14,4 +14,8 @@ module ApplicationHelper
     html += capture( &block ) << "\n</html>".html_safe if block_given?
     html.html_safe
   end
+  
+  def current_user
+    User.first
+  end
 end

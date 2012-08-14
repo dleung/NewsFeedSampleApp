@@ -4,10 +4,10 @@ gem 'rails', '3.2.3'
 
 gem 'pg'
 gem 'slim'
-gem 'cancan'
 gem 'simple_form'
 gem 'kaminari'
 gem 'truncate_html'
+gem 'gritter'
 gem 'news_feed'
 
 group :assets do
