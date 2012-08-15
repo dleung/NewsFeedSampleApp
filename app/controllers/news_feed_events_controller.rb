@@ -18,150 +18,62 @@ class NewsFeedEventsController < ApplicationController
     pet_id = params[:pet_id]
     object_type = params[:news_feed_object]
     object_name = params[:news_feed_object_name]
+    object_constantize = object_type.constantize
+    object_id = object_type.foreign_key
     sender = User.find(params[:sender])
     action = params[:action_type]
-    case action
-    when "Create"
-      if object_name.blank?
-        flash[:notice] = "Missing information for #{object_type}."
-        redirect_to news_feed_events_path and return
-      end
-      case object_type  
-      when "Message"
-        if Message.all.size >= OBJECT_SIZE
-          flash[:notice] = "Can only have a maximum of #{OBJECT_SIZE} #{object_type}."
-          redirect_to news_feed_events_path and return
-        else
-          object = Message.new(name: object_name)  
-        end
-      when "User"
-        if User.all.size >= OBJECT_SIZE
-          flash[:notice] = "Can only have a maximum of #{OBJECT_SIZE} #{object_type}."
-          redirect_to news_feed_events_path and return
-        else
-          object = User.new(name: object_name)
-        end
-      when "Pet"
-        if Pet.all.size >= OBJECT_SIZE
-          flash[:notice] = "Can only have a maximum of #{OBJECT_SIZE} #{object_type}."
-          redirect_to news_feed_events_path and return          
-        else
-          object = Pet.new(name: object_name)  
+    begin
+      if ["Update", "Delete", "Send"].include? action
+        unless eval(object_id).present? || object_name.present?
+          raise 'error'
         end
       end
-      if object.save
-        flash[:notice] = "#{object_type} successfully created."
+      case action
+      when "Create"
+        if object_name.blank?
+          flash[:notice] = "Missing information for #{object_type}."
+        elsif object_constantize.all.size >= OBJECT_SIZE
+          flash[:notice] = "Can only have a maximum of #{OBJECT_SIZE} #{object_type}."
+        else
+          object = object_constantize.create!(name: object_name)
+          flash[:notice] = "#{object_type} successfully created."
+        end
+      when "Update"
+        if object_name =="User" && User.find(user_id) == current_user
+           flash[:notice] = "Cannot edit yourself"
+        else
+          object = object_constantize.find(eval(object_id))
+          object.update_attributes!(name: object_name)
+          flash[:notice] = "#{object_type} successfully updated."
+        end
+      when "Delete"
+        if (object_name =="User") && (User.find(user_id) == current_user)
+          flash[:notice] = "Cannot delete yourself"
+        else 
+          object = object_constantize.find(eval(object_id)).destroy
+          flash[:notice] = "#{object_type} successfully removed."
+        end
+      when "Send"
+        object = object_constantize.find(eval(object_id))
+        flash[:notice] = "#{object_type} successfully sent."          
+      when "Custom Message"
+        if params[:news_feed_custom].blank?
+            flash[:notice] = "Missing information for custom message."        
+        else
+          flash[:notice] = "Custom message created."
+          action = "custom"
+          object = current_user
+          options = params[:news_feed_custom]
+        end
       else
-        flash[:notice] = "Name is required for #{object_type}."
-        set_up_instance_variables
-        render "index" and return
+        flash[:notice] = "Need to specify correct action"
       end
-    when "Update"
-      case object_type  
-      when "Message"
-        if message_id.blank? || object_name.blank?
-          flash[:notice] = "Missing information for #{object_type}."
-          redirect_to news_feed_events_path and return
-        else
-          object = Message.find(message_id)
-          object.update_attributes(name: object_name)
-        end
-      when "User"
-        if user_id.blank? || object_name.blank?
-          flash[:notice] = "Missing information for #{object_type}."
-          redirect_to news_feed_events_path and return
-        else
-          if User.find(user_id) == current_user
-            flash[:notice] = "Cannot edit yourself"
-            redirect_to news_feed_events_path and return
-          else
-            object = User.find(user_id)
-            object.update_attributes(name: object_name)
-          end
-        end
-      when "Pet"
-        if pet_id.blank? || object_name.blank?
-          flash[:notice] = "Missing information for #{object_type}."
-          redirect_to news_feed_events_path and return
-        else
-          object = Pet.find(pet_id)
-          object.update_attributes(name: object_name)
-        end
-      end
-      flash[:notice] = "#{object_type} successfully updated."
-    when "Delete"
-      case object_type  
-      when "Message"
-        if message_id.blank?
-          flash[:notice] = "Missing information for #{object_type}."
-          redirect_to news_feed_events_path and return
-        else
-          object = Message.find(message_id).destroy
-        end  
-      when "User"
-        if user_id.blank?
-          flash[:notice] = "Missing information for #{object_type}."
-          redirect_to news_feed_events_path and return
-        else
-          if User.find(user_id) == current_user
-            flash[:notice] = "Cannot delete yourself"
-            redirect_to news_feed_events_path and return
-          else
-            object = User.find(user_id).destroy
-          end
-        end
-      when "Pet"
-        if pet_id.blank?
-          flash[:notice] = "Missing information for #{object_type}."
-          redirect_to news_feed_events_path and return
-        else
-          object = Pet.find(pet_id).destroy
-        end
-      end
-      flash[:notice] = "#{object_type} successfully removed."
-    when "Send"
-      case object_type  
-      when "Message"
-        if message_id.blank?
-          flash[:notice] = "Missing information for #{object_type}."
-          redirect_to news_feed_events_path and return
-        else
-          object = Message.find(message_id)
-        end  
-      when "User"
-        if user_id.blank?
-          flash[:notice] = "Missing information for #{object_type}."
-          redirect_to news_feed_events_path and return
-        else
-          object = User.find(user_id)
-        end
-      when "Pet"
-        if pet_id.blank?
-          flash[:notice] = "Missing information for #{object_type}."
-          redirect_to news_feed_events_path and return
-        else
-          object = Pet.find(pet_id)
-        end
-      end
-      flash[:notice] = "#{object_type} successfully sent."
-    when "Custom Message"
-      if params[:news_feed_custom].blank?
-          flash[:notice] = "Missing information for custom message."
-          redirect_to news_feed_events_path and return        
-      else
-        flash[:notice] = "Custom message created."
-        action = "custom"
-        object = current_user
-        options = params[:news_feed_custom]
-      end
- 
-    else
-      flash[:notice] = "Need to specify correct action"
-      redirect_to news_feed_events_path and return
+    rescue
+      flash[:notice] = "Missing information for #{object_type}."
     end
     if NewsFeedEvent.all.size == NEWSFEED_EVENT_SIZE
       flash[:notice] = "Can only have a maximum of #{NEWSFEED_EVENT_SIZE} news feeds."
-    else
+    elsif defined?(object).present? && object.present?
       object.insertNewsFeed(action.to_sym.capitalize, current_user, sender, options)
     end
     redirect_to news_feed_events_path

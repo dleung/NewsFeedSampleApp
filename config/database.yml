@@ -16,7 +16,7 @@ production:
   password: graceling
   host: /tmp
 
-test:
+test: &test
   adapter: postgresql
   encoding: unicode
   database: news_feed_test
@@ -24,3 +24,6 @@ test:
   username: quosap
   password: graceling
   host: /tmp
+
+cucumber:
+  <<: *test

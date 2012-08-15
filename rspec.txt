@@ -1,0 +1,31 @@
+
+NewsFeedEventsController
+  incorrect object creation
+  sending a custom message should work should work
+  maximum of 10 objects should be created
+  object should be created correctly
+  deleting a user should work
+  sending a 'user' should work
+  object without information should not be created
+  updating user information should work
+
+Message
+  name of message should return correctly
+  message without name should not be valid
+  message with inappropiate name should not be valid
+
+Pet
+  name pet should return correctly
+  pet without name should not be valid
+  pet with inappropiate name should not be valid
+
+User
+  name of user should return correctly
+  user without name should not be valid
+  user with inappropiate name should not be valid
+
+Finished in 2.29 seconds
+17 examples, 0 failures
+
+Randomized with seed 50134
+
