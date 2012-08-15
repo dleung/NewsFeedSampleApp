@@ -28,21 +28,21 @@ class NewsFeedEventsController < ApplicationController
       end
       case object_type  
       when "Message"
-        if Message.all.size == OBJECT_SIZE
+        if Message.all.size >= OBJECT_SIZE
           flash[:notice] = "Can only have a maximum of #{OBJECT_SIZE} #{object_type}."
           redirect_to news_feed_events_path and return
         else
           object = Message.new(name: object_name)  
         end
       when "User"
-        if User.all.size == OBJECT_SIZE
+        if User.all.size >= OBJECT_SIZE
           flash[:notice] = "Can only have a maximum of #{OBJECT_SIZE} #{object_type}."
           redirect_to news_feed_events_path and return
         else
           object = User.new(name: object_name)
         end
       when "Pet"
-        if Pet.all.size == OBJECT_SIZE
+        if Pet.all.size >= OBJECT_SIZE
           flash[:notice] = "Can only have a maximum of #{OBJECT_SIZE} #{object_type}."
           redirect_to news_feed_events_path and return          
         else
@@ -149,6 +149,7 @@ class NewsFeedEventsController < ApplicationController
           flash[:notice] = "Missing information for custom message."
           redirect_to news_feed_events_path and return        
       else
+        flash[:notice] = "Custom message created."
         action = "custom"
         object = current_user
         options = params[:news_feed_custom]

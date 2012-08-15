@@ -30,7 +30,7 @@ ul#list_heading
                   span.icon class=news_feed.event_type data-id="#{news_feed.id}"
                   span.time= news_feed.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%l:%M %P")
                   span.text 
-                    = link_to truncate_html(news_feed.text, length:100), '#'
+                    = link_to truncate_html(Obscenity.sanitize(news_feed.text), length:100), '#'
                     .delete = button_to " ", news_feed, method: :delete
 #table_view
   h2 My News Feeds
@@ -52,5 +52,5 @@ ul#list_heading
                 = news_feed.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%l:%M %P")
                 br
                 = pretty_date(news_feed.created_at)
-              td.text = news_feed.text
+              td.text = Obscenity.sanitize(news_feed.text)
               td.remove = button_to " ", news_feed, method: :delete

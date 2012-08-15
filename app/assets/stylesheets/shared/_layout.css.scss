@@ -1,3 +1,6 @@
+@import "compass/css3/pie";
+@import "compass/css3";
+
 body {
   margin: 0px;
 }
@@ -35,5 +38,27 @@ img {
   display: none;
 }
 
-  
+.clear-space {
+  clear:both;
+  height: 15px;
+}
+
+#footer {
+  width: 980px;
+  margin: 0 auto;
+  text-align: center;
+  background: #ccd5ff;
+  border: solid 1px grey;
+  border-top: none;
+  padding: 5px 0;
+  @include border-radius(0 0 5px 5px);
+  font-family: 'Architects Daughter', cursive;
+  color: #4a8bab;
+}
+
+ul {
+  li {
+    list-style-type: none;
+  }
+}
 
