@@ -13,7 +13,10 @@ img {
 }
 
 #container {
-  width: 100%;
+  width: 980px;
+  margin: 0 auto;
+  border-left: solid 1px grey;
+  border-right: solid 1px grey;
 }
 
 .clear {

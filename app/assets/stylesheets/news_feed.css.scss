@@ -3,14 +3,18 @@
 
 // Styles for main window banner
 #main_banner {
+  border-left: solid 1px grey;
+  border-right: solid 1px grey;
   height: 34px;
+  width: 980px;
+  margin: 0 auto;
   background-color: #f5f5f5;
   p {
     margin: 0px 10px;
     padding: 5px 0 0 0;
   }
   #logged_user {
-    margin-top: 7px;
+    margin: 7px 25px 0 0;
     float: right;
   }
   #sort_by {
@@ -52,14 +56,15 @@
 
 // Styles for main window
 #main_window {
-  width: 100%;
+  width: 670px;
   float: left;
 }
 
 // Styles for sidebar 
 #side_bar {
-  width: 297px;
-  position: absolute;
+  border-left: solid 1px #b6b6b6;
+  width: 270px;
+  float: left;
   right: 0px;
   height: 600px;
   background-color: #f5f5f5;
@@ -112,7 +117,7 @@
 
 .create_button {
     input[type="submit"] {
-    left: 150px;
+    left: 114px;
     position: relative;
     @include background(linear-gradient(#e7f3fb, #c0dff5));
     border: solid 1px #a6cbe3;
@@ -131,6 +136,8 @@ ul#list_heading {
   background-color: #eff2ff;
   border-top: solid 1px #b6b6b6;
   border-bottom: solid 1px #b6b6b6;
+  @include border-radius(0 5px 0 0);
+
   height: 20px;
   li {
     padding-left: 15px;
@@ -150,7 +157,7 @@ ul#list_heading {
       margin-left: 50px;      
     }
     &#description {
-      margin-left: 400px;
+      margin-left: 80px;
     }
   }
 }
@@ -159,7 +166,7 @@ ul#list_heading {
   float: left;
   position: relative;
   margin: 5px;
-  left: 320px;
+  left: 40px;
   width: 500px;
   form {
     float: left;
@@ -186,6 +193,8 @@ ul#list_heading {
       padding: 3px 3px;
       font-size: 13px;
       text-transform: uppercase;
+      position: relative;
+      left: 245px;
       a {
       color: black;
       font-weight: bold;
@@ -252,12 +261,10 @@ ul#list_heading {
       }
       ul.by_news_feed {
         margin-top: 3px;
-        border-top: solid 1px #d1d1d1;
-        padding: 0px;
+        padding: 0px 15px 0 0;
         li.by_news_feed {
           list-style-type: none;
           border: solid 1px #d1d1d1;
-          border-top: none;
           padding: 5px;
           &:hover {
             background-color: #fffcd2;
@@ -271,14 +278,15 @@ ul#list_heading {
             font-weight: bold;
           }
           span.text {
+            max-width: 400px;
             display: inline-block;
             a {
+              line-height: 1.4;
               top: 5px;
               height: 23px;
               max-width: 600px;
               color: black;
               text-decoration: none;
-              float:left;
               position:relative;
               &:hover {
                 text-decoration: underline;  
@@ -286,7 +294,7 @@ ul#list_heading {
             }
             .delete {
               display:none;
-              float:left;
+              float:right;
               background: image-url("icon_delete_2.png") no-repeat 0 3px;
               background-size: 17px 17px;
               input {
@@ -305,7 +313,7 @@ ul#list_heading {
 }
 
 #news_feed_table {
-  width: 900px;
+  width: 640px;
   padding: 15px;
   table#dataTable{
     tbody{

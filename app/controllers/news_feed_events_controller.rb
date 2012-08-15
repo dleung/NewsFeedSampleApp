@@ -1,5 +1,12 @@
 class NewsFeedEventsController < ApplicationController
+  before_filter :set_up_user
+  after_filter :limit_database_size
+  
   PER_PAGE = 10
+  OBJECT_SIZE = 10
+  NEWSFEED_EVENT_SIZE = 55
+  NEWSFEED_OBJECTS = ["User", "Message", "Pet"]
+  NEWSFEED_ACTIONS = ["Create", "Update", "Delete", "Send", "Custom Message"]
   
   def index
     set_up_instance_variables
@@ -21,11 +28,26 @@ class NewsFeedEventsController < ApplicationController
       end
       case object_type  
       when "Message"
-        object = Message.new(name: object_name)  
+        if Message.all.size == OBJECT_SIZE
+          flash[:notice] = "Can only have a maximum of #{OBJECT_SIZE} #{object_type}."
+          redirect_to news_feed_events_path and return
+        else
+          object = Message.new(name: object_name)  
+        end
       when "User"
-        object = User.new(name: object_name)
+        if User.all.size == OBJECT_SIZE
+          flash[:notice] = "Can only have a maximum of #{OBJECT_SIZE} #{object_type}."
+          redirect_to news_feed_events_path and return
+        else
+          object = User.new(name: object_name)
+        end
       when "Pet"
-        object = Pet.new(name: object_name)
+        if Pet.all.size == OBJECT_SIZE
+          flash[:notice] = "Can only have a maximum of #{OBJECT_SIZE} #{object_type}."
+          redirect_to news_feed_events_path and return          
+        else
+          object = Pet.new(name: object_name)  
+        end
       end
       if object.save
         flash[:notice] = "#{object_type} successfully created."
@@ -122,11 +144,25 @@ class NewsFeedEventsController < ApplicationController
         end
       end
       flash[:notice] = "#{object_type} successfully sent."
+    when "Custom Message"
+      if params[:news_feed_custom].blank?
+          flash[:notice] = "Missing information for custom message."
+          redirect_to news_feed_events_path and return        
+      else
+        action = "custom"
+        object = current_user
+        options = params[:news_feed_custom]
+      end
+ 
     else
       flash[:notice] = "Need to specify correct action"
       redirect_to news_feed_events_path and return
     end
-    object.insertNewsFeed(action.to_sym.capitalize, current_user, sender)
+    if NewsFeedEvent.all.size == NEWSFEED_EVENT_SIZE
+      flash[:notice] = "Can only have a maximum of #{NEWSFEED_EVENT_SIZE} news feeds."
+    else
+      object.insertNewsFeed(action.to_sym.capitalize, current_user, sender, options)
+    end
     redirect_to news_feed_events_path
   end
   
@@ -155,6 +191,8 @@ class NewsFeedEventsController < ApplicationController
     end
   end
   
+  private
+  
   def set_up_instance_variables
     @all_news_feed_events = User.first.news_feed_events.order("created_at desc")
     @news_feed_events = @all_news_feed_events.page(params[:page]).per(PER_PAGE)
@@ -162,8 +200,28 @@ class NewsFeedEventsController < ApplicationController
     @user_list = User.all
     @message_list = Message.all
     @pet_list = Pet.all
-    @news_feed_objects = ["User", "Message", "Pet"]
-    
-    @action = ["Create", "Update", "Delete", "Send"]
+    @news_feed_objects = NEWSFEED_OBJECTS
+    @action = NEWSFEED_ACTIONS
+  end
+  
+  def set_up_user
+    if User.all.size == 0
+      User.create!(name: "Anonymous")
+    end
+  end
+  
+  def limit_database_size
+    while User.all.size > 10
+      User.last.delete
+    end
+    while Message.all.size > 10
+      Message.last.delete
+    end      
+    while Pet.all.size > 10
+      Pet.last.delete
+    end
+    while NewsFeedEvent.all.size > 55
+      NewsFeedEvent.first.delete
+    end
   end
 end

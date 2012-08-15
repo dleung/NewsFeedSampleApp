@@ -55,7 +55,7 @@ $(function(){
     return false
   });
   
-  $('#user_select_option, #message_select_option, #pet_select_option').hide();
+  $('#user_select_option, #message_select_option, #pet_select_option, #text_input_custom').hide();
   
   $('#news_feed_object').change(function(){
     $('#user_select_option').hide();
@@ -103,6 +103,9 @@ $(function(){
     $('#message_select_option').hide();
     $('#pet_select_option').hide();
     $('#text_input').hide();
+    $('#choose_actor').show();
+    $('#choose_object').show();
+    $('#text_input_custom').hide();
     if ($('#action_type').val() == "Create") {
       $('#text_input').show();
     } else if ($('#action_type').val() == "Update") {
@@ -114,6 +117,10 @@ $(function(){
       } else if ($('#news_feed_object').val() == "Pet") {
         $('#pet_select_option').show();
       }
+    } else if ($('#action_type').val() == "Custom Message") {
+      $('#text_input_custom').show();  
+      $('#choose_actor').hide();
+      $('#choose_object').hide();
     } else if ($('#action_type').val() == "Delete") {
       if ($('#news_feed_object').val() == "User") {
         $('#user_select_option').show();

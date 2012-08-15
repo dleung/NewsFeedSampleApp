@@ -19,4 +19,8 @@ span.icon {
     background: image-url("icon_send.png") no-repeat 0 3px;
     background-size: 17px 17px;
   }
+  &.Custom {
+    background: image-url("icon_custom.png") no-repeat 0 3px;
+    background-size: 17px 17px;
+  }
 }
