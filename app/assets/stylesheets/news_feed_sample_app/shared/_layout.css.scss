@@ -1,0 +1,78 @@
+@import "compass/css3/pie";
+@import "compass/css3";
+
+body {
+  margin: 0px;
+}
+
+section {
+  min-width: 980px;
+}
+
+img {
+  border: none;
+  padding: none;
+  margin: none;
+}
+
+#container {
+  width: 980px;
+  margin: 0 auto;
+  border-left: solid 1px grey;
+  border-right: solid 1px grey;
+}
+
+.clear {
+  clear: both;
+}
+
+.fleft {
+  float: left;
+}
+
+.margin-fix {
+  margin: 10px 0 0 22px;
+}
+
+.commented {
+  display: none;
+}
+
+.clear-space {
+  clear:both;
+  height: 15px;
+}
+
+#footer {
+  width: 980px;
+  margin: 0 auto;
+  text-align: center;
+  background: #ccd5ff;
+  border: solid 1px grey;
+  border-top: none;
+  padding: 5px 0;
+  @include border-radius(0 0 5px 5px);
+  font-family: 'Architects Daughter', cursive;
+  color: #4a8bab;
+}
+
+.copyright-link{
+  font-family: 'Architects Daughter', cursive;
+  color: #4a8bab;
+  text-decoration: none;
+}
+
+ul {
+  li {
+    list-style-type: none;
+  }
+}
+
+h1 {
+  font-family: 'Architects Daughter', cursive;
+  color: #4a8bab;
+}
+
+h2, .margin-left-50 {
+  margin-left: 50px;
+}

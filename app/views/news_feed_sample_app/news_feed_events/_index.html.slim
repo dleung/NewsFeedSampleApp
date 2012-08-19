@@ -1,0 +1,58 @@
+ul#list_heading
+  li#time Time
+  li#description Description
+
+.clear  
+#list_view
+  h2 My News Feeds
+      
+  #search_bar
+    = form_tag search_news_feed_events_path, method: 'GET' do
+      label Search
+      = text_field_tag :q, params[:q], class: 'inputbox'
+      = submit_tag " ", id: "search_icon"
+    - unless @news_feed_events.blank?
+      #paginate = paginate @news_feed_events, window: 2
+  
+  #news_feed_list
+    - unless @news_feed_events.blank?
+      ul.by_date
+        - @news_feed_events.group_by{|e| e.created_at.to_date}.each do |date, news_feeds|
+          li.by_date
+            span.date_span = pretty_date(date)
+            ul.by_news_feed
+              - news_feeds.each do |news_feed|
+                li.by_news_feed
+                  span.icon class=news_feed.event_type data-id="#{news_feed.id}"
+                  span.time= news_feed.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%l:%M %P")
+                  span.text 
+                    = truncate_html(Obscenity.sanitize(news_feed.text), length:100)
+                    .delete = button_to " ", news_feed, method: :delete, id: "delete_#{news_feed.id}"
+    - if action_name == "search"
+      p.margin-left-50 Showing #{@num_results} results for: "#{@search_params}"
+    - else
+      p.margin-left-50 
+        | Showing "#{@num_results}" News Feeds 
+        = link_to "Show all", news_feed_events_path
+#table_view
+  h2 My News Feeds
+  #news_feed_table
+    - unless @all_news_feed_events.blank?
+      table#dataTable
+        thead
+          tr 
+            th Action
+            th Time
+            th Description
+            th Delete?
+        tbody
+          - @all_news_feed_events.each do |news_feed|
+            tr 
+              td.action
+                span.icon class=news_feed.event_type
+              td.date 
+                = news_feed.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%l:%M %P")
+                br
+                = pretty_date(news_feed.created_at)
+              td.text = Obscenity.sanitize(news_feed.text)
+              td.remove = button_to " ", news_feed, method: :delete

@@ -1,0 +1,18 @@
+doctype html
+= conditional_html do
+  head
+    title News Feed Sample Application
+    = stylesheet_link_tag 'news_feed_sample_app/application'
+    = javascript_include_tag 'news_feed_sample_app/application'
+    = favicon_link_tag
+    = csrf_meta_tags
+    = render 'layouts/font'
+  body
+    #wrapper{class=controller_name}
+      = render 'layouts/news_feed_sample_app/flash_container'
+      = render 'layouts/news_feed_sample_app/header'
+      #main
+        section
+          = yield
+    .push
+    #footer= render 'layouts/news_feed_sample_app/footer'
