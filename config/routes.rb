@@ -1,4 +1,4 @@
-NewsFeedSampleApp::Application.routes.draw do
+NewsFeedSampleApp::Engine.routes.draw do
   root :to => "news_feed_events#index"
   
   resources :news_feed_events do
