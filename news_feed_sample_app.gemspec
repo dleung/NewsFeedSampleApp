@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = NewsFeedSampleApp::VERSION
   s.authors     = ["David Leung"]
   s.email       = ["dleung@quosap.com"]
-  s.homepage    = "capykoa.com"
+  s.homepage    = "www.capykoa.com"
   s.summary     = "A stand alone sample application utilizing gem 'newsfeed'."
   s.description = "This app allows users to create newsfeed events associated to objects."
 
