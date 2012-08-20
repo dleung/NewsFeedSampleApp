@@ -4,7 +4,7 @@ gemspec
 
 gem 'rails', '3.2.7'
 
-gem 'pg'
+#gem 'pg'
 gem 'slim'
 gem 'simple_form'
 gem 'kaminari'

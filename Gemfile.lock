@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     news_feed_sample_app (0.0.1)
-      news_feed
+      obscenity
       rails (~> 3.2.7)
 
 GEM
@@ -115,8 +115,6 @@ GEM
     nokogiri (1.5.5)
     nokogiri (1.5.5-x86-mingw32)
     obscenity (1.0.0)
-    pg (0.14.0)
-    pg (0.14.0-x86-mingw32)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -213,7 +211,6 @@ DEPENDENCIES
   news_feed
   news_feed_sample_app!
   obscenity
-  pg
   rails (= 3.2.7)
   rspec-rails (~> 2.0)
   sass-rails
