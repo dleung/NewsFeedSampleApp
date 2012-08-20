@@ -7,17 +7,15 @@ require "news_feed_sample_app/version"
 Gem::Specification.new do |s|
   s.name        = "news_feed_sample_app"
   s.version     = NewsFeedSampleApp::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of NewsFeed."
-  s.description = "TODO: Description of NewsFeed."
+  s.authors     = ["David Leung"]
+  s.email       = ["dleung@quosap.com"]
+  s.homepage    = "capykoa.com"
+  s.summary     = "A stand alone sample application utilizing gem 'newsfeed'."
+  s.description = "This app allows users to create newsfeed events associated to objects."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 3.2.7"
   s.add_dependency 'obscenity'
-
   s.add_development_dependency "sqlite3"
 end
