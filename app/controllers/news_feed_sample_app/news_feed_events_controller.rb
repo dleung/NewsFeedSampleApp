@@ -1,6 +1,5 @@
 module NewsFeedSampleApp
   class NewsFeedEventsController < ApplicationController
-    before_filter :set_up_user
     after_filter :limit_database_size
     helper_method :current_user
     
@@ -119,12 +118,6 @@ module NewsFeedSampleApp
       @action = NEWSFEED_ACTIONS
     end
     
-    def set_up_user
-      if NewsFeedSampleApp::User.all.size == 0
-        NewsFeedSampleApp::User.create!(name: "Anonymous")
-      end
-    end
-    
     def limit_database_size
       while NewsFeedSampleApp::User.all.size > 10
         NewsFeedSampleApp::User.last.delete
@@ -142,6 +135,6 @@ module NewsFeedSampleApp
   end
   
   def current_user
-    current_user
+    current_user = User.first
   end
 end

@@ -3,6 +3,7 @@ class CreateUsers < ActiveRecord::Migration
     create_table :news_feed_sample_app_users do |t|
       t.string :name
       t.timestamps
-    end
+    end   
+    NewsFeedSampleApp::User.create!(name: "Anonymous")
   end
 end

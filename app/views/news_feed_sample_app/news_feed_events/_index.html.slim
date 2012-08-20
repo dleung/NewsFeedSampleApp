@@ -29,11 +29,13 @@ ul#list_heading
                     = truncate_html(Obscenity.sanitize(news_feed.text), length:100)
                     .delete = button_to " ", news_feed, method: :delete, id: "delete_#{news_feed.id}"
     - if action_name == "search"
-      p.margin-left-50 Showing #{@num_results} results for: "#{@search_params}"
+      p.margin-left-50 
+        | Showing {@num_results} results for: "#{@search_params}"
+        = link_to "Show all", news_feed_events_path
     - else
       p.margin-left-50 
-        | Showing "#{@num_results}" News Feeds 
-        = link_to "Show all", news_feed_events_path
+        | Showing #{@num_results} News Feeds 
+        
 #table_view
   h2 My News Feeds
   #news_feed_table
