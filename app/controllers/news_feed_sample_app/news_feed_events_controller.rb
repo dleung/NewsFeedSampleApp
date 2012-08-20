@@ -135,6 +135,6 @@ module NewsFeedSampleApp
   end
   
   def current_user
-    current_user = User.first
+    current_user = NewsFeedSampeApp::User.first
   end
 end
