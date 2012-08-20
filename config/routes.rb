@@ -1,5 +1,5 @@
 NewsFeedSampleApp::Engine.routes.draw do
-  root :to => redirect("/news_feed_events")
+  root :to => "news_feed_events#index"
   
   resources :news_feed_events do
     get :search, on: :collection
