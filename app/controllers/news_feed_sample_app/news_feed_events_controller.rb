@@ -79,7 +79,9 @@ module NewsFeedSampleApp
       end
       redirect_to news_feed_events_path
     end
-    
+
+# This portion is compatible only with a postgres server
+=begin
     def search
       set_up_instance_variables
       if params[:q].blank?
@@ -95,7 +97,8 @@ module NewsFeedSampleApp
       end
       render 'index'
     end
-  
+=end
+
     def destroy
       news_feed_event = NewsFeedEvent.find(params[:id])
       if news_feed_event.destroy

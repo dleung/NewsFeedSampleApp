@@ -6,7 +6,7 @@ ul#list_heading
 #list_view
   h2 My News Feeds
       
-  #search_bar
+  /#search_bar
     = form_tag search_news_feed_events_path, method: 'GET' do
       label Search
       = text_field_tag :q, params[:q], class: 'inputbox'
