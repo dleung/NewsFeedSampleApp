@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'spec_helper'
-
 describe NewsFeedEventsController do
   sample_data_loader
 
